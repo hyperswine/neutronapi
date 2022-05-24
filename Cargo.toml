@@ -2,7 +2,12 @@
 name = "neutronapi"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Interface for apps and neutron"
 
 [dependencies]
+
+[features]
+# used by both kernel and apps/std
+types = []
+# used by userspace only
+interface = []
