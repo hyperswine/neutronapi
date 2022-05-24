@@ -1,12 +1,19 @@
 #![no_std]
 
-// open an openable, usually a file
+// -----------------
+// USER API
+// -----------------
+
+/// Open a path on the root filesystem
 pub fn open() {}
 
 // -----------------
 // SYSTEM WIDE TYPES
 // -----------------
 
+/// Neutron timestamp for use in logs and filesystems
+#[repr(C)]
+#[derive(Debug, Clone, Copy)]
 pub struct KTimestamp {
     day: u8,
     month: u8,
@@ -28,7 +35,7 @@ impl KTimestamp {
 
         // SHOULD DO THIS MANUALLY WITHOUT ALLOC
         // let s = _str.replace("-", "");
-        let mut s = _str;
+        let s = _str;
 
         // check first four are numbers 0-9
         let year = &s[0..3];
@@ -59,7 +66,7 @@ impl KTimestamp {
         let day = day.parse::<u8>();
         // depending on the month and year (leap year), get the max date
         let day_max = match day {
-            Ok(d) => {
+            Ok(_) => {
                 // if january, march, etc. always 31 days
                 if month_31days.contains(&month) {
                     31 as u8
@@ -95,4 +102,3 @@ impl KTimestamp {
         })
     }
 }
-
