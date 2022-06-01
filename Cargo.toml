@@ -5,6 +5,9 @@ edition = "2021"
 description = "Interface for apps and neutron"
 
 [dependencies]
+itertools = { version = "0.10.3", default-features = false, features = [
+    "use_alloc",
+] }
 
 [features]
 # used by both kernel and apps/std

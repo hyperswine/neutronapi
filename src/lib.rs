@@ -4,6 +4,9 @@
 // USER API
 // -----------------
 
+pub mod fs;
+extern crate alloc;
+
 /// Open a path on the root filesystem
 pub fn open() {}
 
