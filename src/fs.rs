@@ -45,20 +45,22 @@ pub struct SupportedFS {
     mount_point: String,
 }
 
+// std::fs uses these functions on a file that impls Readable/Writable
+
 pub trait Readable {
     /// Read entire file to string
-    fn read_all(&self) -> String;
+    fn read_all(&mut self) -> String;
 
-    fn read_at(&self, buf: &mut [u8], offset: u64) -> Result<usize, &'static str>;
-    fn read_exact_at(&self, buf: &mut [u8], offset: u64) -> Result<(), &'static str>;
+    fn read_at(&mut self, buf: &mut [u8], offset: u64) -> Result<usize, &'static str>;
+    fn read_exact_at(&mut self, buf: &mut [u8], offset: u64) -> Result<(), &'static str>;
 }
 
 pub trait Writable {
     /// Rewrite file with new string
     fn rewrite(&mut self, buf: &[u8]);
 
-    fn write_at(&self, buf: &[u8], offset: u64) -> Result<usize, &'static str>;
-    fn write_all_at(&self, buf: &[u8], offset: u64) -> Result<(), &'static str>;
+    fn write_at(&mut self, buf: &[u8], offset: u64) -> Result<usize, &'static str>;
+    fn write_all_at(&mut self, buf: &[u8], offset: u64) -> Result<(), &'static str>;
 }
 
 pub struct NeutronFile {}
